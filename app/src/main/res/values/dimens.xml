@@ -6,8 +6,9 @@
    Date: 7/29/2024
 -->
 <resources>
-    <dimen name="top_bar_button_size">65dp</dimen>
-    <dimen name="top_bar_icon_margin">12dp</dimen>
+    <dimen name="top_bar_button_size">55dp</dimen>
+    <dimen name="top_bar_icon_margin">15dp</dimen>
     <dimen name="top_bar_icon_horizontal_margin">20dp</dimen>
+    <dimen name="normal_text_size">22sp</dimen>
 
 </resources>

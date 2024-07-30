@@ -6,7 +6,7 @@
    Date: 
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/dark_text_color"
@@ -68,17 +68,17 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/selected_color"
-            android:textSize="27dp"
-            android:layout_margin="10dp"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_margin="@dimen/top_bar_icon_margin"
             android:text="07.06.2024 \n 18:50"/>
 
 
         <LinearLayout
             android:id="@+id/deviceBatteryLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="@dimen/top_bar_icon_margin">
 
                 <ImageView
                     android:layout_width="@dimen/top_bar_button_size"
@@ -92,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@color/text_color"
-                    android:textSize="27dp"
+                    android:textSize="@dimen/normal_text_size"
                     android:text="%100" />
 
         </LinearLayout>
