@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   Author: Ahmet TOPAK
+   Version: 1.0
+   Date: 
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/dark_text_color"
+    android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/driveMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/drive_mode_selector" />
+
+        <ToggleButton
+            android:id="@+id/soundMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/headset_selector" />
+
+        <ToggleButton
+            android:id="@+id/lightMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/lamp_selector"/>
+
+        <ToggleButton
+            android:id="@+id/infraredMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/infrared_selector" />
+
+        <ToggleButton
+            android:id="@+id/peripheralLightMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/peripheral_lights_selector"/>
+
+        <ToggleButton
+            android:id="@+id/connectionMenuToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/connection_selector"/>
+
+        <ToggleButton
+            android:id="@+id/parkModeToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/park_mode_selector"/>
+
+        <ToggleButton
+            android:id="@+id/screenRecordToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/screen_record_selector" />
+
+        <ToggleButton
+            android:id="@+id/screenshotToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/screenshot_selector" />
+
+        <ToggleButton
+            android:id="@+id/emergencyStopToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/emergency_stop_selector"/>
+
+        <TextView
+            android:id="@+id/dateTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/selected_color"
+            android:textSize="27dp"
+            android:layout_margin="10dp"
+            android:text="07.06.2024 \n 18:50"/>
+
+
+        <LinearLayout
+            android:id="@+id/deviceBatteryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/top_bar_button_size"
+                    android:layout_height="@dimen/top_bar_button_size"
+                    android:contentDescription="Device Battery Icon"
+                    android:src="@drawable/device_battery_grey" />
+
+                <TextView
+                    android:id="@+id/deviceBatteryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:textSize="27dp"
+                    android:text="%100" />
+
+        </LinearLayout>
+
+
+        <ToggleButton
+            android:id="@+id/closeRobotToggleButton"
+            style="@style/TopBarToggleIconStyle"
+            android:background="@drawable/shutdown_selector" />
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="button_background_color">#414143</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="dark_text_color">#262629</color>
+    <color name="menu_icon_background_color">#D9D9D9</color>
+    <color name="selected_color">#E98C0E</color>
+    <color name="subtitles_color">#ABABAD</color>
+
+</resources>

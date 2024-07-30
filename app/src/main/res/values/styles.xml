@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   Author: Ahmet TOPAK
+   Version: 1.0
+   Date: 
+-->
+<resources>
+
+    <style name="TopBarToggleIconStyle" >
+        <item name="android:textOn" value=""/>
+        <item name="android:textOff" value=""/>
+        <item name="android:layout_margin">@dimen/top_bar_icon_margin</item>
+        <item name="android:layout_width">@dimen/top_bar_button_size</item>
+        <item name="android:layout_height" >@dimen/top_bar_button_size</item>
+    </style>
+
+</resources>

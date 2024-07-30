@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   Author: Ahmet TOPAK
+   Version: 1.0
+   Date: 
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true"
+
+        android:drawable="@drawable/vehicle_orange" />
+    <item android:state_checked="false"
+
+        android:drawable="@drawable/vehicle_grey" />
+
+</selector>
