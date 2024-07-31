@@ -1,6 +1,16 @@
 package com.ahmet.androiduitestapp.topbar;
 
+import android.content.Context;
 import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import com.ahmet.androiduitestapp.ToggleManager;
+import com.ahmet.androiduitestapp.popup.DriveModePopup;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Ahmet TOPAK
@@ -10,36 +20,74 @@ import android.view.View;
 
 public class TopBarController {
 
+    private Context context;
     private TopBar topBar;
+
+    private DriveModePopup driveModePopup;
+
 
     public TopBarController(TopBar topBar) {
         this.topBar = topBar;
+        this.context = topBar.getContext();
         initTopBarListener();
+
+
+
+
+        initPopups();
+    }
+    public TopBarController(TopBar topBar , Context context) {
+        new TopBarController(topBar);
+    }
+    private void initPopups(){
+        initDriveModePopup();
+
     }
 
     private void initTopBarListener() {
         topBar.setTopBarListener(new TopBar.TopBarListener() {
             @Override
-            public void onToggleButtonCheckedChange(View view, TopBar.TopBarViewId viewId, boolean isChecked) {
-                handleToggleButtonCheckedChange(viewId, isChecked);
+            public void onToggleButtonCheckedChange(ToggleButton toggleButton, TopBar.TopBarViewId viewId, boolean isChecked) {
+                handleToggleButtonCheckedChange(toggleButton,viewId, isChecked);
             }
 
             @Override
             public void onViewClicked(View view, TopBar.TopBarViewId viewId) {
-                handleViewClicked(viewId);
+                handleViewClicked(view,viewId);
             }
 
             @Override
             public void onViewLongPressed(View view, TopBar.TopBarViewId viewId) {
-                handleViewLongPressed(viewId);
+                handleViewLongPressed(view,viewId);
             }
         });
     }
 
-    private void handleToggleButtonCheckedChange(TopBar.TopBarViewId viewId, boolean isChecked) {
+    private void initDriveModePopup() {
+        driveModePopup = new DriveModePopup(topBar.getContext(), new DriveModePopup.DriveModePopupListener() {
+            @Override
+            public void onOffRoadDriveModeSelected() {
+                Toast.makeText(topBar.getContext(), "onOffRoadDriveModeSelected", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNormalDriveModeSelected() {
+                Toast.makeText(topBar.getContext(), "onNormalDriveModeSelected", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLearningDriveModeSelected() {
+                Toast.makeText(context, "onLearningDriveModeSelected", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void handleToggleButtonCheckedChange(View view , TopBar.TopBarViewId viewId, boolean isChecked) {
         switch (viewId) {
             case DRIVE_MODE:
                 // Handle drive mode toggle button change
+                togglePopup(view , driveModePopup , isChecked);
+
                 break;
             case SOUND:
                 // Handle sound toggle button change
@@ -73,8 +121,14 @@ public class TopBarController {
                 break;
         }
     }
-
-    private void handleViewClicked(TopBar.TopBarViewId viewId) {
+    private void togglePopup(View anchorView,PopupWindow popupWindow , boolean isShow){
+        if(isShow){
+            popupWindow.showAsDropDown(anchorView);
+        }else{
+            popupWindow.dismiss();
+        }
+    }
+    private void handleViewClicked(View view , TopBar.TopBarViewId viewId) {
         switch (viewId) {
             case DRIVE_MODE:
                 // Handle drive mode button click
@@ -112,7 +166,7 @@ public class TopBarController {
         }
     }
 
-    private void handleViewLongPressed(TopBar.TopBarViewId viewId) {
+    private void handleViewLongPressed(View view , TopBar.TopBarViewId viewId) {
         switch (viewId) {
             case DRIVE_MODE:
                 // Handle drive mode button long press

@@ -74,7 +74,7 @@ public class TopBar extends LinearLayout {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (listener != null) {
-                    listener.onToggleButtonCheckedChange(compoundButton , buttonId, button.isChecked());
+                    listener.onToggleButtonCheckedChange(button , buttonId, button.isChecked());
                 }
             }
         });
@@ -105,7 +105,7 @@ public class TopBar extends LinearLayout {
     }
 
     public interface TopBarListener {
-        void onToggleButtonCheckedChange(View view ,TopBarViewId viewId, boolean isChecked);
+        void onToggleButtonCheckedChange(ToggleButton toggleButton ,TopBarViewId viewId, boolean isChecked);
         void onViewClicked(View view ,TopBarViewId viewId);
         void onViewLongPressed(View view , TopBarViewId viewId);
 
