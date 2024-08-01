@@ -15,4 +15,10 @@
         <item name="android:layout_height" >@dimen/top_bar_button_size</item>
     </style>
 
+    <style name="NormalTextStyle" >
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/selected_color</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+    </style>
+
 </resources>

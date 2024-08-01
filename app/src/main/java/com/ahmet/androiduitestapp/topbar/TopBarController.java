@@ -2,6 +2,7 @@ package com.ahmet.androiduitestapp.topbar;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -30,10 +31,6 @@ public class TopBarController {
         this.topBar = topBar;
         this.context = topBar.getContext();
         initTopBarListener();
-
-
-
-
         initPopups();
     }
     public TopBarController(TopBar topBar , Context context) {
@@ -47,8 +44,8 @@ public class TopBarController {
     private void initTopBarListener() {
         topBar.setTopBarListener(new TopBar.TopBarListener() {
             @Override
-            public void onToggleButtonCheckedChange(ToggleButton toggleButton, TopBar.TopBarViewId viewId, boolean isChecked) {
-                handleToggleButtonCheckedChange(toggleButton,viewId, isChecked);
+            public void onCompoundButtonCheckedChange(CompoundButton compoundButton, TopBar.TopBarViewId viewId, boolean isChecked) {
+                handleCompoundButtonCheckedChange(compoundButton,viewId, isChecked);
             }
 
             @Override
@@ -82,11 +79,11 @@ public class TopBarController {
         });
     }
 
-    private void handleToggleButtonCheckedChange(View view , TopBar.TopBarViewId viewId, boolean isChecked) {
+    private void handleCompoundButtonCheckedChange(CompoundButton button , TopBar.TopBarViewId viewId, boolean isChecked) {
         switch (viewId) {
             case DRIVE_MODE:
                 // Handle drive mode toggle button change
-                togglePopup(view , driveModePopup , isChecked);
+                togglePopup(button , driveModePopup , isChecked);
 
                 break;
             case SOUND:

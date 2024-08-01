@@ -2,16 +2,12 @@ package com.ahmet.androiduitestapp.popup;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.ToggleButton;
 
-import com.ahmet.androiduitestapp.R;
 import com.ahmet.androiduitestapp.ToggleManager;
 import com.ahmet.androiduitestapp.databinding.DriveModePopupBinding;
+import com.ahmet.androiduitestapp.databinding.SoundPopupBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +17,13 @@ import java.util.List;
  * @version 1.0
  * @since 7/31/2024
  */
-public class DriveModePopup extends CustomPopupWindow {
+public class SoundPopup extends CustomPopupWindow {
 
-    DriveModePopupBinding binding;
-    private final DriveModePopupListener listener;
+    SoundPopupBinding binding;
+    private final SoundPopupListener listener;
     private ToggleManager toggleManager;
 
-    public DriveModePopup(Context context, DriveModePopupListener listener) {
+    public SoundPopup(Context context, SoundPopupListener listener) {
         super(context);
         this.listener = listener;
         initialize(context);
@@ -35,18 +31,18 @@ public class DriveModePopup extends CustomPopupWindow {
 
     private void initialize(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        binding = DriveModePopupBinding.inflate(inflater);
+        binding = SoundPopupBinding.inflate(inflater);
 
         // Set the content view and dimensions
         setContentView(binding.getRoot());
 
         // Initialize toggle buttons
         List<ToggleButton> toggleButtons = new ArrayList<>();
-        toggleButtons.add(binding.offRoadDriveMode);
-        toggleButtons.add(binding.normalDriveMode);
-        toggleButtons.add(binding.learningDriveMode);
+        toggleButtons.add(binding.voiceSend);
+        toggleButtons.add(binding.voiceReceive);
+        toggleButtons.add(binding.pushToTalk);
 
-        toggleManager = new ToggleManager(toggleButtons, toggleListener, ToggleManager.ToggleMode.SINGLE_MUST_BE_ACTIVE);
+        toggleManager = new ToggleManager(toggleButtons, toggleListener, ToggleManager.ToggleMode.SINGLE_SELECTION);
     }
 
     private final ToggleManager.ToggleListener toggleListener = new ToggleManager.ToggleListener() {
@@ -60,19 +56,19 @@ public class DriveModePopup extends CustomPopupWindow {
 
     private void handleSelection(CompoundButton buttonView) {
         if (listener != null) {
-            if (buttonView == binding.offRoadDriveMode) {
-                listener.onOffRoadDriveModeSelected();
-            } else if (buttonView == binding.normalDriveMode) {
-                listener.onNormalDriveModeSelected();
-            } else if (buttonView == binding.learningDriveMode) {
-                listener.onLearningDriveModeSelected();
+            if (buttonView == binding.voiceSend) {
+                listener.onVoiceSendSelected();
+            } else if (buttonView == binding.voiceReceive) {
+                listener.onVoiceReceiveSelected();
+            } else if (buttonView == binding.pushToTalk) {
+                listener.onPushToTalkSelected();
             }
         }
     }
 
-    public interface DriveModePopupListener {
-        void onOffRoadDriveModeSelected();
-        void onNormalDriveModeSelected();
-        void onLearningDriveModeSelected();
+    public interface SoundPopupListener {
+        void onVoiceSendSelected();
+        void onVoiceReceiveSelected();
+        void onPushToTalkSelected();
     }
 }

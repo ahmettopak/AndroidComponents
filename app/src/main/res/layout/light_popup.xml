@@ -9,19 +9,43 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/button_background_color">
 
-    <!-- Alt menü öğeleri -->
-    <Switch
-        android:id="@+id/switch_button"
+    <TextView
+        android:id="@+id/frontLightText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <Switch
-        android:id="@+id/switch_button2"
+        style="@style/NormalTextStyle"
+        android:text="Front Light"/>
+
+    <SeekBar
+        android:id="@+id/frontLightValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10" />
+
+    <TextView
+        android:id="@+id/backLightText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <!-- İsterseniz diğer öğeleri buraya ekleyebilirsiniz -->
+        style="@style/NormalTextStyle"
+        android:text="Back Light"/>
+    <SeekBar
+        android:id="@+id/backLightValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"/>
 
+
+    <TextView
+        android:id="@+id/ptzLightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/NormalTextStyle"
+        android:text="Back Light"/>
+    <SeekBar
+        android:id="@+id/ptzLightValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"/>
 </LinearLayout>

@@ -10,7 +10,13 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 
+import com.ahmet.androiduitestapp.ToggleManager;
 import com.ahmet.androiduitestapp.databinding.TopBarLayoutBinding;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ahmet TOPAK
@@ -22,8 +28,11 @@ import com.ahmet.androiduitestapp.databinding.TopBarLayoutBinding;
 
 public class TopBar extends LinearLayout {
 
-    TopBarLayoutBinding binding;
+    private TopBarLayoutBinding binding;
     private TopBarListener listener;
+    private ToggleManager toggleManager;
+    private Map<CompoundButton, TopBarViewId> buttonIdMap;
+
     public enum TopBarViewId {
         DRIVE_MODE,
         SOUND,
@@ -37,6 +46,7 @@ public class TopBar extends LinearLayout {
         EMERGENCY_STOP,
         CLOSE_ROBOT
     }
+
     public TopBar(Context context) {
         super(context);
         init(context);
@@ -55,59 +65,69 @@ public class TopBar extends LinearLayout {
     private void init(Context context) {
         binding = TopBarLayoutBinding.inflate(LayoutInflater.from(context), this, true);
 
-        setOnCheckedChangeListener(binding.driveMenuToggleButton, TopBarViewId.DRIVE_MODE);
-        setOnCheckedChangeListener(binding.soundMenuToggleButton, TopBarViewId.SOUND);
+        buttonIdMap = new HashMap<>();
+        buttonIdMap.put(binding.driveMenuToggleButton, TopBarViewId.DRIVE_MODE);
+        buttonIdMap.put(binding.soundMenuToggleButton, TopBarViewId.SOUND);
+        buttonIdMap.put(binding.lightMenuToggleButton, TopBarViewId.LIGHTS);
+        buttonIdMap.put(binding.infraredMenuToggleButton, TopBarViewId.IR_BUTTONS);
+        buttonIdMap.put(binding.peripheralLightMenuToggleButton, TopBarViewId.PERIPHERAL_LIGHTS);
+        buttonIdMap.put(binding.connectionMenuToggleButton, TopBarViewId.CONNECTIONS);
 
-        setOnCheckedChangeListener(binding.lightMenuToggleButton, TopBarViewId.LIGHTS);
-        setOnCheckedChangeListener(binding.infraredMenuToggleButton, TopBarViewId.IR_BUTTONS);
-        setOnCheckedChangeListener(binding.peripheralLightMenuToggleButton, TopBarViewId.PERIPHERAL_LIGHTS);
-        setOnCheckedChangeListener(binding.connectionMenuToggleButton, TopBarViewId.CONNECTIONS);
-        setOnCheckedChangeListener(binding.parkModeToggleButton, TopBarViewId.PARK_MODE);
-        setOnCheckedChangeListener(binding.screenRecordToggleButton, TopBarViewId.SCREEN_RECORD);
-        setOnCheckedChangeListener(binding.screenshotToggleButton, TopBarViewId.SCREENSHOT_BUTTON);
-        setOnCheckedChangeListener(binding.emergencyStopToggleButton, TopBarViewId.EMERGENCY_STOP);
-        setOnCheckedChangeListener(binding.closeRobotToggleButton , TopBarViewId.CLOSE_ROBOT);
-    }
-
-    private void setOnCheckedChangeListener(ToggleButton button, final TopBarViewId buttonId) {
-        button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        List<ToggleButton> toggleButtons = new ArrayList<>();
+        for (CompoundButton button : buttonIdMap.keySet()) {
+            if (button instanceof ToggleButton) {
+                toggleButtons.add((ToggleButton) button);
+            }
+        }
+        toggleManager = new ToggleManager(toggleButtons, new ToggleManager.ToggleListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onToggleCheckedChange(CompoundButton buttonView, boolean isChecked) {
                 if (listener != null) {
-                    listener.onToggleButtonCheckedChange(button , buttonId, button.isChecked());
+                    TopBarViewId viewId = buttonIdMap.get(buttonView);
+                    if (viewId != null) {
+                        listener.onCompoundButtonCheckedChange(buttonView, viewId, isChecked);
+                    }
                 }
             }
-        });
+        }, ToggleManager.ToggleMode.SINGLE_SELECTION
+        );
+
+        for (Map.Entry<CompoundButton, TopBarViewId> entry : buttonIdMap.entrySet()) {
+            setOnClickListener(entry.getKey(), entry.getValue());
+            setOnLongClickListener(entry.getKey(), entry.getValue());
+        }
     }
+
     private void setOnClickListener(View view, final TopBarViewId buttonId) {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onViewClicked(view , buttonId);
+                    listener.onViewClicked(view, buttonId);
                 }
             }
         });
     }
+
     private void setOnLongClickListener(View view, final TopBarViewId buttonId) {
         view.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 if (listener != null) {
-                    listener.onViewLongPressed(view,buttonId);
+                    listener.onViewLongPressed(view, buttonId);
                 }
-                return false;
+                return true;
             }
         });
     }
+
     public void setTopBarListener(TopBarListener listener) {
         this.listener = listener;
     }
 
     public interface TopBarListener {
-        void onToggleButtonCheckedChange(ToggleButton toggleButton ,TopBarViewId viewId, boolean isChecked);
-        void onViewClicked(View view ,TopBarViewId viewId);
-        void onViewLongPressed(View view , TopBarViewId viewId);
-
+        void onCompoundButtonCheckedChange(CompoundButton compoundButton, TopBarViewId viewId, boolean isChecked);
+        void onViewClicked(View view, TopBarViewId viewId);
+        void onViewLongPressed(View view, TopBarViewId viewId);
     }
 }

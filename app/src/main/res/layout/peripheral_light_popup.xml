@@ -11,17 +11,30 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
-    <!-- Alt menü öğeleri -->
-    <Switch
-        android:id="@+id/switch_button"
+    <TextView
+        android:id="@+id/peripheralLightBrightnessText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <Switch
-        android:id="@+id/switch_button2"
+        style="@style/NormalTextStyle"
+        android:text="Back Light"/>
+    <SeekBar
+        android:id="@+id/peripheralLightBrightnessValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"/>
+
+
+    <TextView
+        android:id="@+id/peripheralLightFlashRateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <!-- İsterseniz diğer öğeleri buraya ekleyebilirsiniz -->
+        style="@style/NormalTextStyle"
+        android:text="Back Light"/>
+    <SeekBar
+        android:id="@+id/peripheralLightFlashRateValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"/>
+
 
 </LinearLayout>

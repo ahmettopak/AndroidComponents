@@ -11,17 +11,17 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
-    <!-- Alt menü öğeleri -->
-    <Switch
-        android:id="@+id/switch_button"
+    <ToggleButton
+        android:id="@+id/frontCameraInfrared"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <Switch
-        android:id="@+id/switch_button2"
+        android:layout_height="wrap_content"/>
+    <ToggleButton
+        android:id="@+id/backCameraInfrared"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch Button"/>
-    <!-- İsterseniz diğer öğeleri buraya ekleyebilirsiniz -->
+        android:layout_height="wrap_content"/>
+    <ToggleButton
+        android:id="@+id/ptzCameraInfrared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
