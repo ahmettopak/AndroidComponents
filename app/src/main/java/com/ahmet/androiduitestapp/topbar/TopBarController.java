@@ -8,7 +8,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.ahmet.androiduitestapp.ToggleManager;
+import com.ahmet.androiduitestapp.popup.ConnectionTypePopup;
 import com.ahmet.androiduitestapp.popup.DriveModePopup;
+import com.ahmet.androiduitestapp.popup.InfraredPopup;
+import com.ahmet.androiduitestapp.popup.LightPopup;
+import com.ahmet.androiduitestapp.popup.PeripheralLightPopup;
+import com.ahmet.androiduitestapp.popup.SoundPopup;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +30,11 @@ public class TopBarController {
     private TopBar topBar;
 
     private DriveModePopup driveModePopup;
+    private SoundPopup soundPopup;
+    private LightPopup lightPopup;
+    private InfraredPopup infraredPopup;
+    private PeripheralLightPopup peripheralLightPopup;
+    private ConnectionTypePopup connectionTypePopup;
 
 
     public TopBarController(TopBar topBar) {
@@ -38,7 +48,11 @@ public class TopBarController {
     }
     private void initPopups(){
         initDriveModePopup();
-
+        initSoundPopup();
+        initLightPopup();
+        initInfraredPopup();
+        initPeripheralLightPopup();
+        initConnectionTypePopup();
     }
 
     private void initTopBarListener() {
@@ -79,6 +93,95 @@ public class TopBarController {
         });
     }
 
+    private void initSoundPopup() {
+        soundPopup = new SoundPopup(topBar.getContext(), new SoundPopup.SoundPopupListener() {
+            @Override
+            public void onVoiceSendSelected() {
+
+            }
+
+            @Override
+            public void onVoiceReceiveSelected() {
+
+            }
+
+            @Override
+            public void onPushToTalkSelected() {
+
+            }
+        });
+    }
+
+    private void initLightPopup() {
+        lightPopup = new LightPopup(topBar.getContext(), new LightPopup.LightPopupListener() {
+            @Override
+            public void onFrontLightValueChanged(int value) {
+
+            }
+
+            @Override
+            public void onBackLightValueChanged(int value) {
+
+            }
+
+            @Override
+            public void onPTZLightValueChanged(int value) {
+
+            }
+        });
+    }
+
+    private void initInfraredPopup() {
+        infraredPopup = new InfraredPopup(topBar.getContext(), new InfraredPopup.InfraredPopupListener() {
+            @Override
+            public void onFrontCameraInfraredStateChanged(boolean isChecked) {
+
+            }
+
+            @Override
+            public void onBackCameraInfraredStateChanged(boolean isChecked) {
+
+            }
+
+            @Override
+            public void onPTZCameraInfraredStateChanged(boolean isChecked) {
+
+            }
+        });
+    }
+    private void initPeripheralLightPopup() {
+        peripheralLightPopup = new PeripheralLightPopup(topBar.getContext(), new PeripheralLightPopup.PeripheralLightPopupListener() {
+            @Override
+            public void onBrightnessValueChanged(int value) {
+
+            }
+
+            @Override
+            public void onFlashRateValueChanged(int value) {
+
+            }
+        });
+    }
+
+    private  void initConnectionTypePopup(){
+        connectionTypePopup = new ConnectionTypePopup(topBar.getContext(), new ConnectionTypePopup.ConnectionTypePopupListener() {
+            @Override
+            public void onLteModeSelected() {
+
+            }
+
+            @Override
+            public void onCableModeSelected() {
+
+            }
+
+            @Override
+            public void onRfModeSelected() {
+
+            }
+        });
+    }
+
     private void handleCompoundButtonCheckedChange(CompoundButton button , TopBar.TopBarViewId viewId, boolean isChecked) {
         switch (viewId) {
             case DRIVE_MODE:
@@ -87,19 +190,19 @@ public class TopBarController {
 
                 break;
             case SOUND:
-                // Handle sound toggle button change
+                togglePopup(button , soundPopup , isChecked);
                 break;
             case LIGHTS:
-                // Handle lights toggle button change
+                togglePopup(button , lightPopup , isChecked);
                 break;
             case IR_BUTTONS:
-                // Handle IR buttons toggle button change
+                togglePopup(button , infraredPopup , isChecked);
                 break;
             case PERIPHERAL_LIGHTS:
-                // Handle peripheral lights toggle button change
+                togglePopup(button , peripheralLightPopup , isChecked);
                 break;
             case CONNECTIONS:
-                // Handle connections toggle button change
+                togglePopup(button , connectionTypePopup , isChecked);
                 break;
             case PARK_MODE:
                 // Handle park mode toggle button change
